@@ -7,7 +7,7 @@ name: Build image
 jobs:
   build_matrix:
     name: Build execution matrix
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
     steps:
