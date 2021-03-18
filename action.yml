@@ -1,0 +1,5 @@
+name: 'PHP Parallel Lint'
+description: 'PHP linting using PHP Parallel Lint'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
