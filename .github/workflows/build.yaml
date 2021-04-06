@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.build_matrix.outputs.matrix) }}
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
