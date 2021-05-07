@@ -5,7 +5,7 @@ This action runs PHP linting using PHP Parallel Lint
 ## Example usage
 
 ```yaml
-uses: drugscom/php-parallel-lint-action@v1
+uses: docker://ghcr.io/drugscom/php-parallel-lint-action:1
 with:
   args: --exclude 'vendor'
 ```
