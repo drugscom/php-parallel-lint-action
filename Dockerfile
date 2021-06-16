@@ -1,4 +1,4 @@
-FROM docker.io/library/alpine:3.13 as BUILDER
+FROM docker.io/library/alpine:3.14.0 as BUILDER
 RUN apk --no-cache add \
     composer=~2 \
     git=~2 \
@@ -20,7 +20,7 @@ RUN git clone -q 'https://github.com/php-parallel-lint/PHP-Parallel-Lint.git' . 
     && sed -i -e 's/"main": "parallel-lint.php",/"main": "parallel-lint",/' box.json \
     && box build
 
-FROM docker.io/library/alpine:3.13
+FROM docker.io/library/alpine:3.14.0
 
 LABEL 'com.github.actions.name'='PHP Parallel Lint'
 LABEL 'com.github.actions.description'='PHP linting using PHP Parallel Lint'
