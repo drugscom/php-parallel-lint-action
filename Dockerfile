@@ -1,21 +1,14 @@
-FROM docker.io/library/alpine:3.14.0 as BUILDER
+FROM ghcr.io/drugscom/composer-action:1.0.6 as BUILDER
 RUN apk --no-cache add \
-    composer=~2 \
-    git=~2 \
-    php7=~7.4 \
-    php7-json=~7.4 \
-    php7-phar=~7.4 \
-    php7-simplexml=~7.4 \
-    php7-tokenizer=~7.4 \
-    php7-xmlwriter=~7.4
+    php8-openssl=~8.0
 
 RUN wget -q -O /usr/local/bin/box 'https://github.com/box-project/box2/releases/download/2.7.5/box-2.7.5.phar' \
     && chmod +x /usr/local/bin/box \
-    && sed -i -e 's/^;phar.readonly = On/phar.readonly = Off/' /etc/php7/php.ini
+    && sed -i -e 's/^;phar.readonly = On/phar.readonly = Off/' /etc/php8/php.ini
 
 WORKDIR /app
 RUN git clone -q 'https://github.com/php-parallel-lint/PHP-Parallel-Lint.git' . \
-    && git checkout -q 'v1.2.0' \
+    && git checkout -q 'v1.3.0' \
     && composer install --optimize-autoloader --prefer-dist --no-interaction --no-dev --quiet \
     && sed -i -e 's/"main": "parallel-lint.php",/"main": "parallel-lint",/' box.json \
     && box build
@@ -27,18 +20,18 @@ LABEL 'com.github.actions.description'='PHP linting using PHP Parallel Lint'
 
 RUN apk --no-cache add \
     jq=~1 \
-    php7=~7.4 \
-    php7-ctype=~7.4 \
-    php7-dom=~7.4 \
-    php7-fileinfo=~7.4 \
-    php7-intl=~7.4 \
-    php7-json=~7.4 \
-    php7-phar=~7.4 \
-    php7-simplexml=~7.4 \
-    php7-sockets=~7.4 \
-    php7-tokenizer=~7.4 \
-    php7-xml=~7.4 \
-    php7-xmlwriter=~7.4
+    php8=~8.0 \
+    php8-ctype=~8.0 \
+    php8-dom=~8.0 \
+    php8-fileinfo=~8.0 \
+    php8-intl=~8.0 \
+    php8-phar=~8.0 \
+    php8-simplexml=~8.0 \
+    php8-sockets=~8.0 \
+    php8-tokenizer=~8.0 \
+    php8-xml=~8.0 \
+    php8-xmlwriter=~8.0 \
+    && ln -s /usr/bin/php8 /usr/local/bin/php
 
 COPY --from=BUILDER /app/parallel-lint.phar /usr/local/bin/parallel-lint
 
