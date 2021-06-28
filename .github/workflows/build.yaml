@@ -37,6 +37,7 @@ jobs:
       - name: Build and publish image
         uses: docker/build-push-action@v2
         with:
+          context: .
           labels: ${{ steps.metadata.outputs.labels }}
           tags: ${{ steps.metadata.outputs.tags }}
           no-cache: true
