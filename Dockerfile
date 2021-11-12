@@ -13,7 +13,7 @@ RUN git clone -q 'https://github.com/php-parallel-lint/PHP-Parallel-Lint.git' . 
     && sed -i -e 's/"main": "parallel-lint.php",/"main": "parallel-lint",/' box.json \
     && box build
 
-FROM docker.io/library/alpine:3.14.2
+FROM docker.io/library/alpine:3.14.3
 
 LABEL 'com.github.actions.name'='PHP Parallel Lint'
 LABEL 'com.github.actions.description'='PHP linting using PHP Parallel Lint'
