@@ -1,4 +1,4 @@
-FROM ghcr.io/drugscom/composer-action:1.0.13 as BUILDER
+FROM ghcr.io/drugscom/composer-action:1.0.14 as BUILDER
 RUN apk --no-cache add \
     php8-openssl=~8.0
 
